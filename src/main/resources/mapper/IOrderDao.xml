@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.takeout.dao.IOrderDao">
+
+    <insert id="createOrder">
+        insert into `order`(uuid,openId,shopId,delivery,total,address,status) values(#{uuid},#{openId},#{shopId},#{delivery},#{total},#{address},#{status})
+    </insert>
+
+    <insert id="createOrderMenu">
+        insert into `order_menu`(uuid,uuidMenu,number,title,pic,money) values(#{orderUuid},#{confirm.uuid},#{confirm.number},#{confirm.title},#{confirm.pic},#{confirm.money})
+    </insert>
+
+    <select id="getAllOrder" resultType="Order">
+        SELECT a.uuid,a.openId,a.shopId,a.delivery,a.total,a.address,a.status,a.addTime,b.name shopName
+        FROM
+        `order` AS a
+        LEFT JOIN shop AS b ON a.shopId = b.id
+        WHERE
+        a.openId = #{openId}
+
+    </select>
+    <select id="getOrders" resultType="Order">
+        SELECT a.uuid,a.openId,a.shopId,a.delivery,a.total,a.address,a.status,a.addTime,b.name shopName
+        FROM
+        `order` AS a
+        LEFT JOIN shop AS b ON a.shopId = b.id
+        WHERE
+        a.openId = #{openId} and a.status=#{param}
+    </select>
+    <select id="getOneOrder" resultType="Order">
+        select * from `order` where openId=#{openId} and uuid=#{uuid}
+    </select>
+    <select id="getOrderDetail" resultType="Confirm">
+        select * from `order_menu` where uuid = #{uuid}
+    </select>
+
+</mapper>

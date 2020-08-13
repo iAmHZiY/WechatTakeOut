@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.takeout.dao.IShopDao">
+
+    <select id="findShop" resultType="Shop">
+        select * from shop where name = #{name} and password = #{password}
+    </select>
+
+    <select id="getShopInfo" resultType="Shop">
+        select * from shop where id = #{shopId}
+    </select>
+    <select id="getDelivery" resultType="Integer">
+        select delivery from shop where id=#{shopId}
+    </select>
+    <select id="getAllShopInfo" resultType="Shop">
+        select  * from shop
+    </select>
+
+</mapper>

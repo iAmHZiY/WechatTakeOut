@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.takeout.dao.IFamilyDao">
+
+    <insert id="addFamily">
+        insert into family(uuid,shopId,familyName) values (#{uuid},#{shopId},#{familyName})
+    </insert>
+    <select id="getFamilies" resultType="Family">
+        select * from family where shopId=#{shopId}
+    </select>
+    <delete id="deleteFamily">
+        delete from family where uuid=#{uuid}
+    </delete>
+</mapper>

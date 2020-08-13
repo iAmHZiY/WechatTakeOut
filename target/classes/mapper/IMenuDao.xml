@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.takeout.dao.IMenuDao">
+
+    <select id="getMenusByShopId" resultType="Menu">
+        select * from menu where shopId = #{shopId}
+    </select>
+    <select id="getMenusByShopIdAndFamily" resultType="Menu">
+        select * from menu where shopId = #{shopId} and family = #{family}
+    </select>
+    <select id="getMenuByUuid" resultType="Menu">
+        select * from menu where uuid = #{uuid}
+    </select>
+    <insert id="addMenu">
+        insert into menu(uuid,shopId,title,money,detail,family) values(#{uuid},#{shopId},#{title},#{money},#{detail},#{family})
+    </insert>
+    <select id="getPrice" resultType="int">
+        select money from menu where uuid = #{uuid}
+    </select>
+    <update id="updateMenu">
+        update menu set title = #{title},detail = #{detail},money = #{money},family=#{family} where uuid = #{uuid}
+    </update>
+    <select id="getSortOrder" resultType="String">
+        select sort from menu_sort where shopId = #{shopId}
+    </select>
+    <update id="updateSortOrder">
+        update menu_sort set sort = #{newOrder} where shopId = #{shopId}
+    </update>
+    <delete id="deleteMenu">
+        delete from menu where uuid = #{uuid}
+    </delete>
+
+</mapper>
